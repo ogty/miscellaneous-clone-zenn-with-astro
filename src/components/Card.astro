@@ -1,0 +1,43 @@
+---
+import type { Type } from '../types';
+
+export interface Props {
+  title: string;
+  emoji: string;
+  type: Type;
+  date: string;
+  url: string;
+}
+
+const { title, emoji, type, date, url } = Astro.props;
+---
+
+<article
+  class="flex flex-col relative max-w-sm bg-white rounded-xl border border-gray-200 shadow-lg"
+>
+  <a class="absolute top-0 left-0 h-full w-full flex-1" href={url}>&nbsp;</a>
+  <div class="absolute top-3 left-3 flex space-x-2 justify-center">
+    <span
+      style={`background-color: ${type === 'TECH' ? '#3EA8FF' : '#807AFF'}; font-size: 10px;`}
+      class="text-xs inline-block py-1 px-1.5 leading-none text-center whitespace-nowrap align-baseline font-semibold text-white rounded-full"
+    >
+      {type.toUpperCase()}
+    </span>
+  </div>
+  <div
+    class="py-7 text-center text-5xl rounded-t-lg"
+    style={`background-color: ${type === 'TECH' ? '#CFE5FF' : '#DBDFFF'};`}
+  >
+    {emoji}
+  </div>
+  <div class="pt-4 px-4 flex-1">
+    <h5 class="text-md font-semibold tracking-tigh">
+      {title}
+    </h5>
+  </div>
+  <div class="pb-3 px-4 pt-1">
+    <span class="text-xs" style="color: #93A5B1;">
+      {date}
+    </span>
+  </div>
+</article>

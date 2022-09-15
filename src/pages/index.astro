@@ -1,0 +1,43 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import type { Type } from '../types';
+
+interface Post {
+  title: string;
+  emoji: string;
+  type: Type;
+  date: string;
+  url: string;
+}
+
+const posts = await Astro.glob('../pages/posts/*.md');
+const postsList = posts.map((post): Post => {
+  const { title, date, emoji } = post.frontmatter;
+  const type = post.frontmatter.type.toUpperCase();
+  const url = post.url as string;
+
+  return {
+    title,
+    emoji,
+    type,
+    date,
+    url
+  };
+});
+---
+
+<Layout title="Memo" backgroundColor="#F1F5F9">
+  <main class="mt-0 mx-auto pt-16 px-4 sm:px-6 md:px-10 lg:px-10" style="max-width: 960px;">
+    <div
+      class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 sm:gap-7 md:gap-7 lg:gap-7"
+    >
+      {
+        // eslint-disable-next-line array-callback-return
+        postsList.map((post: Post) => {
+          return <Card {...post} />;
+        })
+      }
+    </div>
+  </main>
+</Layout>

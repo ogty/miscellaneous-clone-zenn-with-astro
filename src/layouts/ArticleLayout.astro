@@ -1,0 +1,48 @@
+---
+import Layout from './Layout.astro';
+
+const { frontmatter } = Astro.props;
+const { title, emoji } = frontmatter;
+---
+
+<Layout title={title} backgroundColor="#edf2f7">
+  <header class="text-center p-14 max-w-4xl my-0 mx-auto">
+    <span class="text-7xl">{emoji}</span>
+    <h1 class="mt-6 text-3xl font-bold">{title}</h1>
+  </header>
+  <div class="mt-0 mx-auto bg-white rounded-xl p-8" style="max-width: 960px;">
+    <slot />
+  </div>
+</Layout>
+
+<style is:global>
+  h2 {
+    margin: 0;
+    outline: 0;
+    font-size: 1.5em;
+    margin-top: 2.3em;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 0.5em;
+  }
+  pre {
+    margin: 0;
+    display: flex;
+    word-wrap: normal;
+    background: #1a2638;
+    overflow-x: auto;
+    box-shadow: 0 4px 6px -1px #000e1e26;
+    word-break: normal;
+    border-radius: 0.7em;
+  }
+  pre > code {
+    display: block;
+    padding: 1.1rem;
+  }
+  pre code {
+    color: #fff;
+    margin: 0;
+    font-size: 0.9em;
+    background: #0000;
+  }
+</style>
